@@ -1,0 +1,33 @@
+{% extends "contact_layout.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+  <div class="row">
+    <div class="col-sm">
+      <div class="list-group">
+        <li class="list-group-item bg-dark text-light"><strong>Contacts</strong></li>
+        {% for contact in contacts %}
+          <a class="list-group-item list-group-item-action" href="{% url 'contacts:contact' id=contact.id %}">{{contact.full_name}}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="col-sm">
+      <div class="content-section">
+        <div class="media">
+          <div class="container">
+            <div class="media-body">
+              <h2 class="account-heading">New Contact</h2>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <form method="post">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <input class="btn btn-primary" type="submit" name="submit" value="Create">
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends "football/layout.html" %}
+
+{% block content %}
+  <p>Stats:</p>
+  <p>Team: {{ team.name }}; Total points: {{ team.points }}</p>
+  <hr>
+  <p>Game home stats:</p>
+  <p>Games played: {{ games_count_home }};
+    Points lost: {{ lost_points_home.team_away_goals__sum }};
+    Points gained: {{ gain_points_home.team_home_goals__sum }}
+  </p>
+  <hr>
+  <p>Game away stats:</p>
+  <p>Games played: {{ games_count_away }};
+    Points lost: {{ lost_points_away.team_home_goals__sum }};
+    Points gained: {{ gain_points_away.team_away_goals__sum }}
+  <hr>
+
+{% endblock content %}

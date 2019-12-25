@@ -1,0 +1,16 @@
+{% extends "football/layout.html" %}
+
+{% block content %}
+    {% if team.first %}
+        <p>{{ team }}</p>
+        <p>{{ team.first.id }}: {{ team.first.name }}</p>
+    {% endif %}
+    {% if not request.COOKIES.items %}
+      <p>No cookies!</p>
+    {% else %}
+      {% for key, value in request.COOKIES.items %}
+        <p>key: {{ key }} | value: {{ value }}</p>
+      {% endfor %}
+    {% endif %}
+
+{% endblock content %}

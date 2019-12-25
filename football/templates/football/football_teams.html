@@ -1,0 +1,67 @@
+{% extends "football/layout.html" %}
+{% block content %}
+{% if games_home %}
+  <div class="card border-secondary mb-3">
+    Games home
+    <div class="card-body">
+      <table class="table table-sm table-bordered">
+        <tbody>
+          {% for game in games_home %}
+            <tr>
+            {% for key, value in game.items %}
+                  <td> {{ value }} </td>
+            {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endif %}
+
+{% if games_away %}
+<div class="card border-secondary mb-3">
+  Games away
+  <div class="card-body">
+    <table class="table table-sm table-bordered">
+      <tbody>
+        {% for game in games_away %}
+          <tr>
+          {% for key, value in game.items %}
+                <td> {{ value }} </td>
+          {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+
+{% if teams %}
+<div class="card border-secondary mb-3">
+  Teams
+  <div class="card-body">
+    <table class="table table-sm table-bordered">
+      <tbody>
+        <p>your cookie is: {{ request.COOKIES.f_team }}</p>
+        {% for team in teams %}
+          {% if request.COOKIES.f_team == team.id|stringformat:"i" %}
+            <tr style="color: red;">
+                <td> {{team.id}} </td>
+                <td> <a href="/stats/{{team.id}}">{{team.name}}</a></td>
+            </tr>
+          {% else %}
+            <tr>
+                <td><a href="/set_as_favourite/?id={{team.id}}">{{team.id}}</a></td>
+                <td> <a href="/stats/{{team.id}}">{{team.name}}</a> </td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+
+{% endblock content %}
